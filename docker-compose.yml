@@ -1,0 +1,27 @@
+networks:
+  cloud-net:
+    name: cloud-net
+
+services:
+  monitoring-node-exporter-server:
+    image: prom/node-exporter:latest
+    container_name: monitoring-node-exporter-server
+    ports: [ "9100:9100" ]
+    networks: [cloud-net]
+    restart: unless-stopped
+
+  monitoring-prometheus-server:
+    image: prom/prometheus:latest
+    container_name: monitoring-prometheus-server
+    ports: [ "9090:9090" ]
+    volumes:
+      - ./monitor/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks: [cloud-net]
+    restart: unless-stopped
+
+  monitoring-grafana-dashboard-server:
+    image: grafana/grafana:latest
+    container_name: monitoring-grafana-dashboard-server
+    ports: [ "3000:3000" ]
+    networks: [cloud-net]
+    restart: unless-stopped
