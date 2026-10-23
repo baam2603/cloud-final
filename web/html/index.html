@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyMiniCloud - Di Sản Văn Hóa Việt Nam</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap");
+
+      :root {
+        --primary: #1d5564;
+        --primary-light: #2c7487;
+        --accent: #d85a38;
+        --bg: #f4f8fa;
+        --surface: #ffffff;
+        --text-main: #243338;
+        --text-muted: #647b83;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        line-height: 1.6;
+      }
+
+      .top-nav-capsule {
+        display: flex;
+        justify-content: center;
+        padding: 24px 16px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+      .capsule-bar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(29, 85, 100, 0.15);
+        border-radius: 999px;
+        padding: 6px 14px;
+        display: flex;
+        gap: 8px;
+        box-shadow: 0 8px 24px rgba(29, 85, 100, 0.15);
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .capsule-item {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-decoration: none;
+        padding: 6px 14px;
+        border-radius: 999px;
+        transition: all 0.25s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .capsule-item:hover,
+      .capsule-item.active {
+        background: var(--primary);
+        color: #fff;
+      }
+      .capsule-item.home-btn {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      h1,
+      h2,
+      h3,
+      .heading-condensed {
+        font-family: "Oswald", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .hero-landing {
+        min-height: 100vh;
+        background:
+          linear-gradient(rgba(17, 43, 50, 0.65), rgba(17, 43, 50, 0.75)),
+          url("images-1/VN.JPG") center/cover no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        padding: 20px;
+      }
+      .hero-subtitle {
+        font-size: 20px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #e0f2fe;
+        margin-bottom: 12px;
+      }
+      .hero-title {
+        font-size: clamp(64px, 12vw, 130px);
+        line-height: 0.95;
+        font-weight: 700;
+        letter-spacing: 6px;
+        color: #ffffff;
+        margin-bottom: 24px;
+      }
+      .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #ffffff;
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 16px;
+        padding: 14px 32px;
+        border-radius: 999px;
+        text-decoration: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+      }
+      .cta-btn:hover {
+        background: var(--primary);
+        color: #ffffff;
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-nav-capsule">
+      <nav class="capsule-bar">
+        <a href="index.html" class="capsule-item home-btn">Trang chủ</a>
+        <a href="blog/" class="capsule-item">01. GIỚI THIỆU DI SẢN</a>
+        <a href="blog/blog1.html" class="capsule-item">02. PHỐ CỔ HỘI AN</a>
+        <a href="blog/blog2.html" class="capsule-item">03. CỐ ĐÔ HUẾ</a>
+        <a href="blog/blog3.html" class="capsule-item">04. HOÀNG THÀNH</a>
+      </nav>
+    </div>
+
+    <div class="hero-landing">
+      <div class="hero-subtitle">DI SẢN VĂN HÓA DU LỊCH</div>
+      <div class="heading-condensed hero-title">VIỆT NAM</div>
+      <p
+        style="
+          max-width: 580px;
+          margin-bottom: 30px;
+          font-size: 16px;
+          color: #f1f5f9;
+        "
+      >
+        Hệ thống Web Server tĩnh MyMiniCloud mô phỏng blog quảng bá di sản & du
+        lịch Việt Nam qua hạ tầng Docker Container.
+      </p>
+      <a href="blog/" class="cta-btn">Khám phá Danh mục Blog →</a>
+    </div>
+  </body>
+</html>
