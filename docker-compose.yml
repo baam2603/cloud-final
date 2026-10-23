@@ -1,0 +1,42 @@
+networks:
+  cloud-net:
+    name: cloud-net
+
+volumes:
+  db_data:
+
+services:
+  application-backend-server:
+    build: ./app
+    image: tv2/app:dev
+    container_name: application-backend-server
+    ports: ["8085:8081"]
+    depends_on: [relational-database-server]
+    networks: [cloud-net]
+    restart: unless-stopped
+
+  relational-database-server:
+      image: mariadb:11
+      container_name: relational-database-server
+      environment:
+        MARIADB_ROOT_PASSWORD: root
+        MARIADB_DATABASE: minicloud
+      volumes:
+        - ./db/init:/docker-entrypoint-initdb.d:ro
+        - db_data:/var/lib/mysql
+      ports: ["3306:3306"]
+      networks: [cloud-net]
+      restart: unless-stopped
+
+  object-storage-server:
+    build: ./storage
+    image: tv2/minio:dev
+    container_name: object-storage-server
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - ./storage/data:/data
+    ports: ["9000:9000", "9001:9001"]
+    networks: [cloud-net]
+    restart: unless-stopped

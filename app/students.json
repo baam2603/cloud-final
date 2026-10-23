@@ -1,0 +1,7 @@
+[
+  {"id": 1, "name": "Đỗ Quang huy", "major": "Computer Science", "gpa": 3.5},
+  {"id": 2, "name": "Dương Vĩ Kiệt", "major": "Information Systems", "gpa": 3.7},
+  {"id": 3, "name": "Phạm Hiệp Phú", "major": "Software Engineering", "gpa": 3.2},
+  {"id": 4, "name": "Võ Văn Khôi Nguyên", "major": "Cybersecurity", "gpa": 3.8},
+  {"id": 5, "name": "Võ Gia Khang", "major": "Cybersecurity", "gpa": 3.4}
+]
