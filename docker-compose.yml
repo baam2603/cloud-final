@@ -1,4 +1,9 @@
-networks: { cloud-net: { name: cloud-net } }
+networks:
+  cloud-net:
+    name: cloud-net
+
+volumes:
+  db_data:
 
 services:
   authentication-identity-server:
@@ -39,13 +44,15 @@ services:
 
   application-backend-server:
     build: ./app
-    image: hotensv/app:dev
+    image: tv2/app:dev
     container_name: application-backend-server
-    networks: [cloud-net]
     ports: ["8085:8081"]
     environment:
       OIDC_ISSUER: "http://authentication-identity-server:8080/realms/master"
       OIDC_AUDIENCE: "myapp"
+    depends_on: [relational-database-server]
+    networks: [cloud-net]
+    restart: unless-stopped
 
   relational-database-server:
     image: mariadb:11
@@ -55,13 +62,15 @@ services:
       MARIADB_DATABASE: minicloud
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d:ro
+      - db_data:/var/lib/mysql
     ports: ["3306:3306"]
     networks: [cloud-net]
+    restart: unless-stopped
 
   object-storage-server:
-    image: minio/minio
+    build: ./storage
+    image: tv2/minio:dev
     container_name: object-storage-server
-    command: ["server", "/data", "--console-address", ":9001"]
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
@@ -69,6 +78,7 @@ services:
       - ./storage/data:/data
     ports: ["9000:9000", "9001:9001"]
     networks: [cloud-net]
+    restart: unless-stopped
 
   monitoring-node-exporter-server:
     image: prom/node-exporter:latest
