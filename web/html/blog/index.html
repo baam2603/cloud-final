@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Di Sản Du Lịch Việt Nam</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap");
+
+      :root {
+        --primary: #1d5564;
+        --primary-light: #2c7487;
+        --accent: #d85a38;
+        --bg: #f4f8fa;
+        --surface: #ffffff;
+        --text-main: #243338;
+        --text-muted: #647b83;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding-bottom: 60px;
+      }
+
+      /* Thanh menu điều hướng dạng pill capsule đặc trưng của slide */
+      .top-nav-capsule {
+        display: flex;
+        justify-content: center;
+        padding: 24px 16px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .capsule-bar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(29, 85, 100, 0.15);
+        border-radius: 999px;
+        padding: 6px 14px;
+        display: flex;
+        gap: 8px;
+        box-shadow: 0 8px 24px rgba(29, 85, 100, 0.08);
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .capsule-item {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-decoration: none;
+        padding: 6px 14px;
+        border-radius: 999px;
+        transition: all 0.25s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .capsule-item:hover,
+      .capsule-item.active {
+        background: var(--primary);
+        color: #fff;
+      }
+      .capsule-item.back-home {
+        background: #e2edf0;
+        color: var(--primary);
+      }
+
+      .container {
+        max-width: 1060px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Khung tem bưu chính (Stamp frame) như ảnh slide */
+      .stamp-frame {
+        background: #fff;
+        padding: 10px;
+        border-radius: 6px;
+        box-shadow: 0 10px 25px rgba(29, 85, 100, 0.12);
+        position: relative;
+        border: 1px solid #d3e2e6;
+      }
+      .stamp-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 4px;
+      }
+
+      h1,
+      h2,
+      h3,
+      .heading-condensed {
+        font-family: "Oswald", sans-serif;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 30px;
+        align-items: center;
+        margin-bottom: 40px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 6px 20px rgba(29, 85, 100, 0.06);
+      }
+      .hero-grid h1 {
+        font-size: clamp(38px, 5vw, 56px);
+        line-height: 1.05;
+        margin-bottom: 16px;
+      }
+      .hero-grid p {
+        color: var(--text-muted);
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .section-title {
+        font-size: 34px;
+        text-align: center;
+        margin-bottom: 8px;
+      }
+      .section-subtitle {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 600;
+        margin-bottom: 36px;
+      }
+
+      /* Thẻ tem thư 3 bài viết */
+      .stamp-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+      .stamp-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 10px 25px rgba(29, 85, 100, 0.08);
+        border: 1px solid #e1ecf0;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+        cursor: pointer;
+      }
+      .stamp-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 32px rgba(29, 85, 100, 0.15);
+        border-color: var(--primary-light);
+      }
+      .stamp-card .thumb-box {
+        width: 100%;
+        height: 240px;
+        background: #eef4f7;
+        border: 8px solid #f9fbfc;
+        outline: 2px dashed #b8ced4;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 18px;
+      }
+      .stamp-card .thumb-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .card-num {
+        font-family: "Oswald", sans-serif;
+        font-size: 28px;
+        color: var(--primary-light);
+        margin-bottom: 4px;
+      }
+      .card-title {
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+      .card-desc {
+        color: var(--text-muted);
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+      .read-badge {
+        margin-top: auto;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navigation Pill Capsule -->
+    <div class="top-nav-capsule">
+      <nav class="capsule-bar">
+        <a href="../index.html" class="capsule-item back-home">← Trang chủ</a>
+        <a href="#gioi-thieu" class="capsule-item active">01. GIỚI THIỆU</a>
+        <a href="blog1.html" class="capsule-item">02. PHỐ CỔ HỘI AN</a>
+        <a href="blog2.html" class="capsule-item">03. CỐ ĐÔ HUẾ</a>
+        <a href="blog3.html" class="capsule-item">04. HOÀNG THÀNH</a>
+      </nav>
+    </div>
+
+    <div class="container">
+      <!-- Hero giới thiệu như slide Giới Thiệu -->
+      <section class="hero-grid" id="gioi-thieu">
+        <div>
+          <div
+            style="
+              color: var(--accent);
+              font-weight: 700;
+              font-size: 14px;
+              letter-spacing: 2px;
+              text-transform: uppercase;
+              margin-bottom: 8px;
+            "
+          >
+            Di Sản & Văn Hóa
+          </div>
+          <h1 class="heading-condensed">GIỚI THIỆU DU LỊCH VIỆT NAM</h1>
+          <p>
+            Việt Nam là quốc gia có bề dày lịch sử và nền văn hóa phong phú,
+            được hình thành qua nhiều thế hệ. Trải qua dòng chảy ngàn năm, những
+            giá trị vật thể và phi vật thể quý báu đã trở thành di sản vô giá
+            được UNESCO công nhận.
+          </p>
+          <div
+            style="
+              font-weight: 600;
+              font-size: 15px;
+              color: var(--primary);
+              font-style: italic;
+            "
+          >
+            “Văn hóa soi đường cho quốc dân đi.” — Hồ Chí Minh
+          </div>
+        </div>
+        <div class="stamp-frame" style="height: 320px">
+          <img
+            src="https://images.unsplash.com/photo-1528127269322-539801943592?w=800&auto=format&fit=crop"
+            alt="Di sản Việt Nam"
+          />
+        </div>
+      </section>
+
+      <!-- Tiêu đề mục di sản tiêu biểu theo slide 19, 20 -->
+      <h2 class="section-title">DI SẢN VĂN HÓA TIÊU BIỂU</h2>
+      <div class="section-subtitle">
+        DANH SÁCH BÀI VIẾT NỔI BẬT DÀNH CHO DU KHÁCH
+      </div>
+
+      <!-- 3 bài viết minh họa theo phong cách khung con tem của slide -->
+      <div class="stamp-grid">
+        <!-- Bài 1: Phố cổ Hội An -->
+        <a href="blog1.html" class="stamp-card">
+          <div class="thumb-box">
+            <img src="images/hoian.JPG" alt="Phố Cổ Hội An" />
+          </div>
+          <div class="card-num">01.</div>
+          <h3 class="card-title">Phố Cổ Hội An</h3>
+          <p class="card-desc">
+            Thương cảng truyền thống Đông Nam Á được bảo tồn nguyên vẹn với mái
+            ngói rêu phong và đèn lồng rực rỡ.
+          </p>
+          <span class="read-badge">Khám phá hành trình →</span>
+        </a>
+
+        <!-- Bài 2: Cố đô Huế -->
+        <a href="blog2.html" class="stamp-card">
+          <div class="thumb-box">
+            <img src="images/hue.JPG" alt="Cố đô Huế" />
+          </div>
+          <div class="card-num">02.</div>
+          <h3 class="card-title">Quần Thể Di Tích Cố Đô Huế</h3>
+          <p class="card-desc">
+            Kinh đô triều Nguyễn với cung điện uy nghiêm, lăng tẩm trầm mặc bên
+            dòng sông Hương thơ mộng.
+          </p>
+          <span class="read-badge">Khám phá hành trình →</span>
+        </a>
+
+        <!-- Bài 3: Hoàng thành Thăng Long -->
+        <a href="blog3.html" class="stamp-card">
+          <div class="thumb-box">
+            <img src="images/hanoi.JPG" alt="Hoàng Thành Thăng Long" />
+          </div>
+          <div class="card-num">03.</div>
+          <h3 class="card-title">Hoàng Thành Thăng Long</h3>
+          <p class="card-desc">
+            Minh chứng lịch sử 13 thế kỷ liên tục của trung tâm quyền lực chính
+            trị quốc gia tại thủ đô Hà Nội.
+          </p>
+          <span class="read-badge">Khám phá hành trình →</span>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
