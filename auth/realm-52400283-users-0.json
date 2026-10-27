@@ -1,0 +1,50 @@
+{
+  "realm" : "realm-52400283",
+  "users" : [ {
+    "id" : "3bfaed02-cff9-467c-a94a-5a4f9a4e926b",
+    "username" : "sv01",
+    "firstName" : "Tuan Khoi",
+    "lastName" : "Nguyen",
+    "email" : "nguyentuankhoi2603@gmail.com",
+    "emailVerified" : true,
+    "enabled" : true,
+    "createdTimestamp" : 1792729647474,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "72b4d161-6636-4e4e-9458-764fdc1bf60a",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1792729674301,
+      "secretData" : "{\"value\":\"h7BXQxPexbb/WSTGmBFbBcjhDJjv8tBQvVZv9m4QEZE=\",\"salt\":\"d3qNgDLsXBVbeFOssmbTaA==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-realm-52400283" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "f1d0d7b3-ab4b-4969-8324-e4b9b676271b",
+    "username" : "sv02",
+    "firstName" : "Khoi Tuan",
+    "lastName" : "Nguyen",
+    "email" : "52400283@student.tdtu.edu.vn",
+    "emailVerified" : true,
+    "enabled" : true,
+    "createdTimestamp" : 1792729689103,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "d22a6273-baa7-4fa5-934d-37d93ee2d5e2",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1792729702777,
+      "secretData" : "{\"value\":\"a7M2tzUv5iznxFg0GP31YjMWKypSPHWns4R6PRfi28Q=\",\"salt\":\"qQgHC9IvvGkMb0BX5teLfw==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-realm-52400283" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}
