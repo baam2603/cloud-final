@@ -1,4 +1,20 @@
 server {
+<<<<<<< HEAD
+    listen 80;
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    add_header X-Web-Server $hostname always;
+
+    location = /lb-test {
+        default_type text/plain;
+        return 200 "Web Server: $hostname\n";
+    }
+    location / {
+        try_files $uri $uri/ =404;
+    }
+=======
   listen 80;
   server_name _;
   root /usr/share/nginx/html;
@@ -18,4 +34,5 @@ server {
     access_log off;
     return 200 "nginx_up 1\n";
   }
+>>>>>>> origin/main
 }

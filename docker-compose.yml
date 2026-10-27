@@ -9,7 +9,7 @@ services:
   authentication-identity-server:
     image: quay.io/keycloak/keycloak:latest
     container_name: authentication-identity-server
-    command: ["start-dev"]
+    command: ["start-dev", "--import-realm"]
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
@@ -19,11 +19,15 @@ services:
     ports: ["8081:8080"]
     restart: unless-stopped
     networks: [cloud-net]
+    volumes:
+      - ./auth:/opt/keycloak/data/import:ro
 
   internal-dns-server:
     image: internetsystemsconsortium/bind9:9.18
     container_name: internal-dns-server
-    ports: ["1053:53/udp"]
+    ports:
+      - "127.0.0.1:1053:53/udp"
+      - "127.0.0.1:1053:53/tcp"
     volumes:
       - ./dns/named.conf:/etc/bind/named.conf:ro
       - ./dns/named.conf.options:/etc/bind/named.conf.options:ro
@@ -36,10 +40,24 @@ services:
     build: ./web
     image: minicloud-web:dev
     container_name: web-frontend-server
+    volumes:
+      - ./web/nginx-lb1.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
       - cloud-net
     ports:
       - "8080:80"
+    restart: unless-stopped
+
+  web-frontend-server2:
+    build: ./web
+    image: minicloud-web2:dev
+    container_name: web-frontend-server2
+    volumes:
+      - ./web/nginx-lb2.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - cloud-net
+    ports:
+      - "8082:80" # truy cap truc tiep web 2 de kiem tra
     restart: unless-stopped
 
   application-backend-server:
@@ -48,7 +66,8 @@ services:
     container_name: application-backend-server
     ports: ["8085:8081"]
     environment:
-      OIDC_ISSUER: "http://authentication-identity-server:8080/realms/master"
+      OIDC_ISSUER: "http://localhost:8081/realms/realm-52400283"
+      OIDC_JWKS_URL: "http://authentication-identity-server:8080/realms/realm-52400283/protocol/openid-connect/certs"
       OIDC_AUDIENCE: "myapp"
     depends_on: [relational-database-server]
     networks: [cloud-net]
@@ -105,6 +124,9 @@ services:
     container_name: api-gateway-proxy-server
     depends_on:
       - web-frontend-server
+      - web-frontend-server2
+      - application-backend-server
+      - authentication-identity-server
     ports:
       - "80:80"
     volumes:
