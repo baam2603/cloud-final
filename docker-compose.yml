@@ -104,6 +104,7 @@ services:
     container_name: monitoring-node-exporter-server
     ports: ["9100:9100"]
     networks: [cloud-net]
+    restart: unless-stopped
 
   monitoring-prometheus-server:
     image: prom/prometheus:latest
@@ -112,12 +113,14 @@ services:
     volumes:
       - ./monitor/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     networks: [cloud-net]
+    restart: unless-stopped
 
   monitoring-grafana-dashboard-server:
     image: grafana/grafana:latest
     container_name: monitoring-grafana-dashboard-server
     ports: ["3000:3000"]
     networks: [cloud-net]
+    restart: unless-stopped
 
   api-gateway-proxy-server:
     image: nginx:stable
